@@ -1,31 +1,26 @@
 <script>
 export default {
-  beforeCreate(){
-    document.querySelector('body').setAttribute('style', 'background-color: #282828')
-  },
   data() {
     return {
-      msg: 'Hello World',
-      content: 'This my frist vue.',
-      profile: '<a href="https://github.com/touero" target="_blanck" style="color: #458588">click here go to</a>',
-      gClass: 'gclass',
-      isClick: false,
-      notClick: true,
+      msg: 'All my monica_omni api',
+      content: 'It is front of my repo monica_omni api, this my frist full stack project.',
     }
   }
 }
 </script>
 
 <template>
-  <h1 v-bind:class="gClass">Hello World</h1>
-  <div :class="gClass">This my frist vue.</div>
-  <p v-html="profile"></p>
-  <button :disabled="isClick">ableClick</button>
-  <button :disabled="notClick">enableClick</button>
-</template>
+  <div class="relative">
+    <div class="relative top-3 left-3">
+      <h1 class="text-4xl font-bold">monica_omni api</h1>
+    </div>
 
-<style>
-.gclass{
-  color: gray;
-}
-</style>
+    <div class="relative top-5 left-3 bottom-2">
+      <h2 class="text-2xl">It is front of my repo monica_omni api, this my frist full stack project.</h2>
+
+      <a class="relative top-6" href="https://github.com/touero" target="_blank">
+        <button class="bg-gray-500 text-white font-bold py-1 px-3 rounded-full hover:bg-gray-700 focus:outline-none focus:shadow-outline disabled:opacity-50 border border-blue-500 shadow-lg text-center">go to my github profile</button>
+      </a>
+    </div>
+  </div>
+</template>
