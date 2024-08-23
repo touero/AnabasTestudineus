@@ -1,7 +1,7 @@
 <script setup>
- import HelloWorld from './components/HelloWorld.vue';
+ import MonicaOmniApi from './components/MonicaOmniApi.vue';
 </script>
 
 <template>
-  <HelloWorld msg = 'You did it!'/>
+  <MonicaOmniApi msg = 'You did it!'/>
 </template>
