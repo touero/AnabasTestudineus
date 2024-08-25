@@ -1,27 +1,40 @@
-<script>
-export default {
-  data() {
-    return {
-      name: "MyApi",
-      result: [
-        { url: "https://api.example.com/endpoint", method: "POST" },
-        { url: "https://api.somewebsite.org/endpoint", method: "POST" },
-        { url: "https://api.anotherdomain.net/endpoint", method: "POST" },
-        { url: "https://api.fakesite.info/endpoint", method: "POST" },
-        { url: "https://api.randomdomain.com/endpoint", method: "POST" }
-      ],
-      activeIndex: null,
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+
+interface ApiResult {
+  url: string;
+  method: string;
+}
+
+export default defineComponent({
+  name: 'MyApiComponet',
+  setup(){
+    const name = ref("MyApi");
+    const result = ref<ApiResult[]>([
+      { url: "https://api.example.com/endpoint", method: "POST" },
+      { url: "https://api.somewebsite.org/endpoint", method: "POST" },
+      { url: "https://api.anotherdomain.net/endpoint", method: "POST" },
+      { url: "https://api.fakesite.info/endpoint", method: "POST" },
+      { url: "https://api.randomdomain.com/endpoint", method: "POST" }
+    ]);
+    const activeIndex = ref<number | null>(null)
+
+    const toggleDetails = (index: number) => {
+      activeIndex.value = activeIndex.value === index ? null : index;
     }
-  },
-  methods:{
-    toggleDetails(index){
-      this.activeIndex = this.activeIndex === index ? null : index;
-    },
-    isActive(index){
-      return this.activeIndex === index;
+
+    const isActive = (index: number) => {
+      return activeIndex.value === index;
+    }
+    return {
+      name,
+      result,
+      activeIndex,
+      toggleDetails,
+      isActive
     }
   }
-}
+})
 </script>
 
 <template>

@@ -1,16 +1,22 @@
-<script>
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
 import MyApi from './MyApi.vue';
-export default {
-  data() {
-    return {
-      name: 'MonicaOmniApi',
-      content: 'It is frontend of my repo MonicaOmniApi, this my frist full stack project.',
-    }
-  },
+
+export default defineComponent({
+  name: 'MonicaOmniComponet',
   components: {
     MyApi
-  }
-}
+  },
+
+  setup() {
+    const name = ref('MonicaOmniApi')
+    const content = ref('It is frontend of my repo MonicaOmniApi, this my frist full stack project.')
+    return {
+      name,
+      content
+    }
+  },
+})
 </script>
 
 <template>
