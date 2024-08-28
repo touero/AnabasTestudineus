@@ -7,12 +7,12 @@ import { fileURLToPath, URL } from 'node:url'
 export default defineConfig({
   plugins: [
     vue(),
-    checker({ typescript: true })  // 启用 TypeScript 类型检查
+    checker({ typescript: true })
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))  // 配置路径别名
+      '@': fileURLToPath(new URL('./src', import.meta.url))
     },
-    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']  // 支持多种文件扩展名
+    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
   }
 })

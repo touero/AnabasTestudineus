@@ -13,9 +13,11 @@ export default defineComponent({
     const result = ref<ApiResult[]>([
       { url: "https://api.example.com/endpoint", method: "POST" },
       { url: "https://api.somewebsite.org/endpoint", method: "POST" },
+      { url: "https://api.test.com/endpoint", method: "GET" },
       { url: "https://api.anotherdomain.net/endpoint", method: "POST" },
       { url: "https://api.fakesite.info/endpoint", method: "POST" },
-      { url: "https://api.randomdomain.com/endpoint", method: "POST" }
+      { url: "https://api.randomdomain.com/endpoint", method: "POST" },
+      { url: "https://api.touero.com/endpoint", method: "GET" },
     ]);
     const activeIndex = ref<number | null>(null)
 
@@ -44,8 +46,8 @@ export default defineComponent({
         <div class="flex space-x-4">
           <button 
             @click="toggleDetails(index)" 
-            class="font-mono font-bold text-slate-100 bg-green-500 border border-gray-300 p-2 rounded hover:bg-green-700"
-          >
+            class="flex font-mono font-bold text-slate-100 bg-green-500 border border-gray-300 p-2 rounded hover:bg-green-700 w-20">
+            <img src="/api.svg" alt="Icon" class="w-4 h-4 mr-1"/>
             {{ item.method }}
           </button>
           <p class="font-mono font-bold text-slate-800 bg-gray-200 border border-gray-300 p-2 rounded">{{ item.url }}</p>
