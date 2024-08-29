@@ -1,5 +1,6 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
+import { fetchData } from '../components_ts/fetchData';
 
 interface ApiResult {
   url: string;
@@ -10,7 +11,10 @@ export default defineComponent({
   name: 'MyApiComponet',
   setup(){
     const name = ref("MyApi");
-    const result = ref<ApiResult[]>([
+    let urlIsClick = ref(false);
+
+    const result = ref<Array<{ url: string; method: string }> | null>(null);
+    const dataTest = ref<ApiResult[]>([
       { url: "https://api.example.com/endpoint", method: "POST" },
       { url: "https://api.somewebsite.org/endpoint", method: "POST" },
       { url: "https://api.test.com/endpoint", method: "GET" },
@@ -19,8 +23,17 @@ export default defineComponent({
       { url: "https://api.randomdomain.com/endpoint", method: "POST" },
       { url: "https://api.touero.com/endpoint", method: "GET" },
     ]);
-    const activeIndex = ref<number | null>(null)
+    onMounted(async() =>{
+      const getData = await fetchData('http://127.0.0.1:2518/all_api')
+      if (getData == null) {
+        result.value = dataTest.value;
+      } else {
+        urlIsClick.value = true;
+        result.value = getData;
+      }
+    });
 
+    const activeIndex = ref<number | null>(null)
     const toggleDetails = (index: number) => {
       activeIndex.value = activeIndex.value === index ? null : index;
     }
@@ -33,7 +46,8 @@ export default defineComponent({
       result,
       activeIndex,
       toggleDetails,
-      isActive
+      isActive,
+      urlIsClick
     }
   }
 })
@@ -46,11 +60,20 @@ export default defineComponent({
         <div class="flex space-x-4">
           <button 
             @click="toggleDetails(index)" 
-            class="flex font-mono font-bold text-slate-100 bg-green-500 border border-gray-300 p-2 rounded hover:bg-green-700 w-20">
+            class="flex font-mono font-bold text-slate-100 bg-green-500 border border-gray-300 p-2 rounded hover:bg-green-700 w-30">
             <img src="/api.svg" alt="Icon" class="w-4 h-4 mr-1"/>
             {{ item.method }}
           </button>
-          <p class="font-mono font-bold text-slate-800 bg-gray-200 border border-gray-300 p-2 rounded">{{ item.url }}</p>
+          
+          <a v-if="urlIsClick"
+            class="font-mono font-bold text-slate-800 bg-gray-200 border border-gray-300 p-2 rounded" 
+            :href="item.url" 
+            target="_blank">
+            {{ item.url }}
+          </a>
+
+          <p v-else class="font-mono font-bold text-slate-800 bg-gray-200 border border-gray-300 p-2 rounded">{{ item.url }}</p>
+
         </div>
         <transition
           name="popup" 

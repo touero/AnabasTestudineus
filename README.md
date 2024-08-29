@@ -1,6 +1,6 @@
-# MonicaOmniApi
+# AnabasTestudineus
 
-This template should help get me started developing with Vue 3 in Vite. It's a simple frontend.
+This template should help get me started developing with Vue 3 in Vite. It's a simple frontend for show some my api.
 
 ## IDE Setup
 
