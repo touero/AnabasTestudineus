@@ -1,9 +1,9 @@
 export interface ApiResponse {
   name: string;
-  data: Array<{ url: string; method: string }>;
+  data: Array<{ name:string; url: string; method: string; desc:string }>;
 }
 
-export async function fetchData(url: string): Promise<Array<{ url: string; method: string }> | null> {
+export async function fetchData(url: string): Promise<Array<{ name:string; url: string; method: string; desc: string }> | null> {
   try {
     const response = await fetch(url);
     

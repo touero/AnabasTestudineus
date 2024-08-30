@@ -13,8 +13,8 @@ export default defineComponent({
   },
 
   setup() {
-    const name = ref('MonicaOmniApi')
-    const content = ref('It is frontend of my repo MonicaOmniApi, this my frist full stack project.')
+    const name = ref('AnabasTestudineus')
+    const content = ref('It is frontend project of my repo AnabasTestudineus, to show another repo: opsariichthys-bidens, all api, All of them is an attempt at a full-stack project')
     return {
       name,
       content,
@@ -34,8 +34,9 @@ export default defineComponent({
       <h2 class="font-sans text-2xl">{{ content }}</h2>
     
       <div class="flex">
-        <LinkButton :href="Url.MyProfile" iconSrc="/github-fill.svg" label="go to author's github profile"/>
-        <LinkButton :href="Url.ThisRepo" iconSrc="/github-fill.svg" label="go to this repo" left="8"/>
+        <LinkButton :href="Url.MyProfile" iconSrc="/github-fill.svg" label="go to author's github profile" left="4"/>
+        <LinkButton :href="Url.ThisRepo" iconSrc="/github-fill.svg" label="go to this frontend repo" left="8"/>
+        <LinkButton :href="Url.Backend" iconSrc="/github-fill.svg" label="go to opsariichthys-bidens" left="12"/>
       </div>
     </div>
 

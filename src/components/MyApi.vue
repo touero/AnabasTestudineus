@@ -1,39 +1,21 @@
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
-import { fetchData } from '../components_ts/fetchData';
+import { defineComponent, ref } from 'vue';
+import { createAllApi } from '../components_ts/creatAllApi';
+import { highlightCode, copyToClipboard } from '../components_ts/highlightCode';
 
-interface ApiResult {
-  url: string;
-  method: string;
-}
+import HighlightCode from './HighlightCode.vue';
 
 export default defineComponent({
   name: 'MyApiComponet',
+  components: {
+    HighlightCode,
+  },
+
   setup(){
     const name = ref("MyApi");
-    let urlIsClick = ref(false);
+    const { urlIsClick, result} = createAllApi();
 
-    const result = ref<Array<{ url: string; method: string }> | null>(null);
-    const dataTest = ref<ApiResult[]>([
-      { url: "https://api.example.com/endpoint", method: "POST" },
-      { url: "https://api.somewebsite.org/endpoint", method: "POST" },
-      { url: "https://api.test.com/endpoint", method: "GET" },
-      { url: "https://api.anotherdomain.net/endpoint", method: "POST" },
-      { url: "https://api.fakesite.info/endpoint", method: "POST" },
-      { url: "https://api.randomdomain.com/endpoint", method: "POST" },
-      { url: "https://api.touero.com/endpoint", method: "GET" },
-    ]);
-    onMounted(async() =>{
-      const getData = await fetchData('http://127.0.0.1:2518/all_api')
-      if (getData == null) {
-        result.value = dataTest.value;
-      } else {
-        urlIsClick.value = true;
-        result.value = getData;
-      }
-    });
-
-    const activeIndex = ref<number | null>(null)
+    const activeIndex = ref<number | null>(null);
     const toggleDetails = (index: number) => {
       activeIndex.value = activeIndex.value === index ? null : index;
     }
@@ -41,13 +23,16 @@ export default defineComponent({
     const isActive = (index: number) => {
       return activeIndex.value === index;
     }
+
     return {
       name,
       result,
       activeIndex,
       toggleDetails,
       isActive,
-      urlIsClick
+      urlIsClick,
+      highlightCode,
+      copyToClipboard
     }
   }
 })
@@ -80,7 +65,8 @@ export default defineComponent({
           enter-active-class="transition ease-out duration-300 transform" 
           leave-active-class="transition ease-in duration-300 transform">
           <div v-if="isActive(index)" class="pl-10 mt-2  bg-gray-200 border border-gray-300 p-2 rounded">
-            <p class="text-gray-700">This is additional information for the API at {{ item.url }}.</p>
+            <p class="text-gray-700 w-50 text-2xl"> {{ item.name + ': ' + item.desc }}</p>
+            <HighlightCode :urlIsClick=urlIsClick :text=highlightCode(item.name)></HighlightCode>
           </div>
         </transition>
         

@@ -18,7 +18,6 @@ export default defineComponent({
     },
     left: {
       type: String as PropType<string>,
-      default: '4'
     }
   }
 });
