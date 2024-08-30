@@ -1,7 +1,9 @@
 <script lang="ts">
+
 import { defineComponent, ref } from 'vue';
 import { createAllApi } from '../components_ts/creatAllApi';
 import { highlightCode, copyToClipboard } from '../components_ts/highlightCode';
+
 
 import HighlightCode from './HighlightCode.vue';
 
