@@ -1,21 +1,30 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 
-export default defineComponent ({
+export default defineComponent({
   name: 'HighlightCode',
-  props:{
+  props: {
     urlIsClick: {
       type: Boolean as PropType<boolean>,
-      required: true
-
+      required: true,
     },
     text: {
       type: String as PropType<string>,
-      required: true
-    }
-  }
-})
+      required: true,
+    },
+  },
+  methods: {
+    copyToClipboard() {
+      navigator.clipboard.writeText(this.text).then(() => {
+        console.log('Text copied to clipboard');
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    },
+  },
+});
 </script>
+
 
 <template>
   <div v-if="urlIsClick" class="relative bg-gray-400 text-black p-4 rounded-md overflow-auto leading-tight top-1">
