@@ -1,21 +1,14 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
+import { urlIsClickDiv, urlIsClickDivProps } from '../components_ts/constants';
 
 export default defineComponent({
   name: 'HighlightCode',
-  props: {
-    urlIsClick: {
-      type: Boolean as PropType<boolean>,
-      required: true,
-    },
-    text: {
-      type: String as PropType<string>,
-      required: true,
-    },
-  },
+  props: urlIsClickDiv,
   methods: {
     copyToClipboard() {
-      navigator.clipboard.writeText(this.text).then(() => {
+      const textToCopy = (this.$props as urlIsClickDivProps).text
+      navigator.clipboard.writeText(textToCopy).then(() => {
         console.log('Text copied to clipboard');
       }).catch(err => {
         console.error('Failed to copy text: ', err);
