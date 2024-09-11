@@ -32,3 +32,12 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Run In Docker
+```sh
+docker build -t monic-omni-api .
+```
+
+```sh
+docker run -p 4173:4173 --name monic-omni-api monic-omni-api
+```
